@@ -28,6 +28,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly 'org.postgresql:postgresql'
     implementation 'tr.gov.gib:gibcore:latest.integration'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation ("com.google.code.gson:gson:2.8.5")
 }
