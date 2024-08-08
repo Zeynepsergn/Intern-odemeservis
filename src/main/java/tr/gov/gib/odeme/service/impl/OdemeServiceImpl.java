@@ -1,18 +1,31 @@
 package tr.gov.gib.odeme.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 import tr.gov.gib.gibcore.exception.GibException;
 import tr.gov.gib.gibcore.object.response.GibResponse;
 import tr.gov.gib.gibcore.object.reuest.GibRequest;
+import tr.gov.gib.gibcore.util.OIDGenerator;
+import tr.gov.gib.odeme.entity.Odeme;
+import tr.gov.gib.odeme.entity.OdemeDetay;
 import tr.gov.gib.odeme.object.BorcSorguReponse;
+import tr.gov.gib.odeme.object.FposResponse;
+import tr.gov.gib.odeme.object.OdemeResponse;
+import tr.gov.gib.odeme.object.SposResponse;
+import tr.gov.gib.odeme.repository.OdemeDetayRepository;
+import tr.gov.gib.odeme.repository.OdemeRepository;
 import tr.gov.gib.odeme.service.OdemeService;
+import tr.gov.gib.odeme.util.Util;
+import tr.gov.gib.odeme.util.enums.OdemeDurum;
+
+import java.util.Date;
 
 @Service("OdemeService")
+@RequiredArgsConstructor
 public class OdemeServiceImpl implements OdemeService {
     @Value("${spos.servis.url}")
     private String sposUrl;
@@ -20,15 +33,54 @@ public class OdemeServiceImpl implements OdemeService {
     @Value("${fpos.servis.url}")
     private String fposUrl;
 
+    private final OdemeRepository odemeRepository;
+    private final OdemeDetayRepository odemeDetayRepository;
+
     @Override
     public GibResponse odemeYap(GibRequest<BorcSorguReponse> request) {
-        BorcSorguReponse data = request.getData();
-        if (data.getOdemeTur().compareTo('S') == 0) {
-            return sposOdemeYap(request);
-        } else if (data.getOdemeTur().compareTo('F') == 0) {
-            return fposOdemeYap(request);
+        GibResponse result;
+        BorcSorguReponse borc = request.getData();
+        Odeme odeme = new Odeme();
+        odeme.setMukellefBorcId(borc.getMukellefBorcId());
+        odeme.setOdemeDurum(OdemeDurum.ODEME_GELDI.getOdemeDurumKodu());
+        odeme.setOptime(new Date());
+
+        OdemeDetay odemeDetay = new OdemeDetay();
+        odemeDetay.setOdeme(odeme);
+        odemeDetay.setOptime(new Date());
+        odemeDetay.setMukellefKullaniciId(borc.getMukellefKullaniciId());
+        odemeDetay.setOdenenBorcMiktari(borc.getBorc());
+        odemeDetay.setVergiId(borc.getVergiId());
+        if (borc.getOdemeTur().compareTo('S') == 0) {
+            odemeDetay.setOid(OIDGenerator.getInstance().getSposOid());
+        } else if (borc.getOdemeTur().compareTo('F') == 0) {
+            odemeDetay.setOid(OIDGenerator.getInstance().getFposOid());
         }
-        return null;
+        odemeRepository.save(odeme);
+        OdemeResponse odemeResponse = new OdemeResponse();
+        odemeResponse.setOid(odemeDetay.getOid());
+        odemeResponse.setOdemeOid(odeme.getId());
+        odemeResponse.setTckn(borc.getTckn());
+        odemeResponse.setOdenecekMiktar(borc.getBorc());
+        odemeResponse.setKartBanka("Ziraat Bankası");
+        odemeResponse.setPosIslemId("TEST");
+        odemeResponse.setKartSahibi("Orhan");
+        GibRequest<OdemeResponse> gibRequest = new GibRequest<>();
+        gibRequest.setData(odemeResponse);
+        if (borc.getOdemeTur().compareTo('S') == 0) {
+            result = sposOdemeYap(gibRequest);
+            SposResponse sposResponse = (SposResponse) result.getData();
+            odemeDetay.setOdemeDetayDurum(Util.getDurum(sposResponse.getDurum()).getOdemeDetayDurumKodu());
+        } else if (borc.getOdemeTur().compareTo('F') == 0) {
+            result = fposOdemeYap(gibRequest);
+            FposResponse fposResponse = (FposResponse) result.getData();
+            odemeDetay.setOdemeDetayDurum(Util.getDurum(fposResponse.getDurum()).getOdemeDetayDurumKodu());
+        }
+
+        odemeDetayRepository.save(odemeDetay);
+        GibResponse response = new GibResponse();
+        response.setData(odeme);
+        return response;
     }
 
     @Override

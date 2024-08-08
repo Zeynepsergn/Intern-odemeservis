@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -17,15 +18,15 @@ public class OdemeDetay {
     @Column(name = "odeme_detay_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "odeme_id")
     private Odeme odeme;
 
     @Column(name = "mukellef_kullanici_id")
-    private Integer mukellefKullanici;
+    private Integer mukellefKullaniciId;
 
     @Column(name = "vergi_id")
-    private Integer vergi;
+    private Integer vergiId;
 
     @Column(name = "oid", length = 10)
     private String oid;
@@ -34,15 +35,15 @@ public class OdemeDetay {
     private String aciklama;
 
     @Column(name = "odenen_borc_miktari")
-    private Double odenenBorcMiktari;
+    private BigDecimal odenenBorcMiktari;
 
     @Column(name = "odeme_detay_durum")
     private Short odemeDetayDurum;
 
     @Column(name = "iade_zamani")
-    private OffsetDateTime iadeZamani;
+    private Date iadeZamani;
 
     @Column(name = "optime")
-    private OffsetDateTime optime;
+    private Date optime;
 
 }

@@ -1,10 +1,16 @@
 package tr.gov.gib.odeme.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,10 +24,10 @@ public class Odeme {
     private Integer id;
 
     @Column(name = "mukellef_borc_id")
-    private Integer mukellefBorc;
+    private Integer mukellefBorcId;
 
     @Column(name = "optime")
-    private OffsetDateTime optime;
+    private Date optime;
 
     @Column(name = "odeme_durum")
     private Short odemeDurum;
