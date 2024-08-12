@@ -1,6 +1,8 @@
 package tr.gov.gib.odeme.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,8 @@ public class Odeme extends GibExceptionHandler {
 
     @RequestMapping(path = "/odemeYap", method = RequestMethod.POST)
     public GibResponse odemeYap(@RequestBody GibRequest<BorcSorguReponse> request) {
+        Logger logger = LoggerFactory.getLogger(Odeme.class);
+        logger.info("Response from odemeYap: {}", request.getData());
         return odemeService.odemeYap(request);
     }
 
