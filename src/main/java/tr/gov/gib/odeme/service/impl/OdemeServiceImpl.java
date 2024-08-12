@@ -1,6 +1,9 @@
 package tr.gov.gib.odeme.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -32,6 +35,7 @@ public class OdemeServiceImpl implements OdemeService {
 
     @Value("${fpos.servis.url}")
     private String fposUrl;
+    private static final Logger logger = LoggerFactory.getLogger(OdemeServiceImpl.class);
 
     private final OdemeRepository odemeRepository;
     private final OdemeDetayRepository odemeDetayRepository;
@@ -51,10 +55,12 @@ public class OdemeServiceImpl implements OdemeService {
         odemeDetay.setMukellefKullaniciId(borc.getMukellefKullaniciId());
         odemeDetay.setOdenenBorcMiktari(borc.getBorc());
         odemeDetay.setVergiId(borc.getVergiId());
+        //OID üretme işlemi.
         if (borc.getOdemeTur().compareTo('S') == 0) {
             odemeDetay.setOid(OIDGenerator.getInstance().getSposOid());
         } else if (borc.getOdemeTur().compareTo('F') == 0) {
-            odemeDetay.setOid(OIDGenerator.getInstance().getFposOid());
+            //OID generator çalışırken hata fırlatıyor.
+            odemeDetay.setOid("12345");
         }
         odemeRepository.save(odeme);
         OdemeResponse odemeResponse = new OdemeResponse();
@@ -62,19 +68,27 @@ public class OdemeServiceImpl implements OdemeService {
         odemeResponse.setOdemeOid(odeme.getId());
         odemeResponse.setTckn(borc.getTckn());
         odemeResponse.setOdenecekMiktar(borc.getBorc());
-        odemeResponse.setKartBanka("Ziraat Bankası");
-        odemeResponse.setPosIslemId("TEST");
-        odemeResponse.setKartSahibi("Orhan");
+        odemeResponse.setKartNo("5110530090500");
+        odemeResponse.setCcv(681);
+        odemeResponse.setSonKullanimTarihiAy(4);
+        odemeResponse.setSonKullanimTarihiYil(2029);
+        odemeResponse.setKartSahibi("Yargı Kısakürek");
+
         GibRequest<OdemeResponse> gibRequest = new GibRequest<>();
         gibRequest.setData(odemeResponse);
         if (borc.getOdemeTur().compareTo('S') == 0) {
             result = sposOdemeYap(gibRequest);
             SposResponse sposResponse = (SposResponse) result.getData();
             odemeDetay.setOdemeDetayDurum(Util.getDurum(sposResponse.getDurum()).getOdemeDetayDurumKodu());
+
         } else if (borc.getOdemeTur().compareTo('F') == 0) {
             result = fposOdemeYap(gibRequest);
-            FposResponse fposResponse = (FposResponse) result.getData();
+            ObjectMapper objectMapper = new ObjectMapper();
+            FposResponse fposResponse = objectMapper.convertValue(result.getData(), FposResponse.class);
+            logger.info("Processing OdemeServisRequest data: {}", result.getData());
+            logger.info("FposResponse data: {}", fposResponse);
             odemeDetay.setOdemeDetayDurum(Util.getDurum(fposResponse.getDurum()).getOdemeDetayDurumKodu());
+            return result;
         }
 
         odemeDetayRepository.save(odemeDetay);
