@@ -3,6 +3,7 @@ package tr.gov.gib.odeme.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import tr.gov.gib.odeme.object.BorcSorguReponse;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -46,4 +47,10 @@ public class OdemeDetay {
     @Column(name = "optime")
     private Date optime;
 
+    public OdemeDetay(BorcSorguReponse borc) {
+        this.optime = new Date();
+        this.mukellefKullaniciId = borc.getMukellefKullaniciId();
+        this.odenenBorcMiktari = borc.getBorc();
+        this.vergiId = borc.getVergiId();
+    }
 }

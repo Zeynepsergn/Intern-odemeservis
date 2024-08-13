@@ -19,5 +19,17 @@ public class OdemeResponse {
     private Integer sonKullanimTarihiAy;
     private Integer sonKullanimTarihiYil;
     private String kartSahibi;
+
+    public OdemeResponse(String oid, Integer id, BorcSorguReponse borc) {
+        this.oid = oid;
+        this.odemeOid = id;
+        this.tckn = borc.getTckn();
+        setOdenecekMiktar(borc.getBorc());
+        setKartNo("5110530090500");
+        setCcv(681);
+        setSonKullanimTarihiAy(4);
+        setSonKullanimTarihiYil(2029);
+        setKartSahibi("Yargı Kısakürek");
+    }
 }
 

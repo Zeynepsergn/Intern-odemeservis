@@ -3,6 +3,8 @@ package tr.gov.gib.odeme.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import tr.gov.gib.odeme.object.BorcSorguReponse;
+import tr.gov.gib.odeme.util.enums.OdemeDurum;
 
 import java.util.Date;
 
@@ -29,4 +31,9 @@ public class Odeme {
     @OneToOne(mappedBy = "odeme")
     private OdemeDetay odemeDetays;
 
+    public Odeme(BorcSorguReponse borc) {
+        this.mukellefBorcId = borc.getMukellefBorcId();
+        this.odemeDurum = OdemeDurum.ODEME_GELDI.getOdemeDurumKodu();
+        this.optime = new Date();
+    }
 }
