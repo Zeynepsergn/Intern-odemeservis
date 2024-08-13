@@ -37,7 +37,7 @@ public class SposOdemeKanaliServiceImpl implements SposOdemeKanaliService {
             //OID üretme işlemi.
             odemeDetay.setOid(OIDGenerator.getSposOID());
             odemeRepository.save(odeme);
-            OdemeResponse odemeResponse = new OdemeResponse(odemeDetay.getOid(),odeme.getId(), odemeKanaliDTO.getBorcSorguReponse());
+            OdemeResponse odemeResponse = new OdemeResponse(odemeDetay.getOid(), odeme.getId(), odemeKanaliDTO.getBorcSorguReponse());
 
             GibRequest<OdemeResponse> gibRequest = new GibRequest<>();
             gibRequest.setData(odemeResponse);

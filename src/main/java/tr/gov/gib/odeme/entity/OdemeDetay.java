@@ -1,7 +1,9 @@
 package tr.gov.gib.odeme.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tr.gov.gib.odeme.object.BorcSorguReponse;
 
@@ -12,6 +14,8 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "odeme_detay", schema = "gsths")
+@AllArgsConstructor
+@NoArgsConstructor
 public class OdemeDetay {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odeme_detay_id_gen")
