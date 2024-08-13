@@ -28,7 +28,7 @@ public class OdemeDetay {
     @Column(name = "vergi_id")
     private Integer vergiId;
 
-    @Column(name = "oid", length = 10)
+    @Column(name = "oid", length = 20)
     private String oid;
 
     @Column(name = "aciklama", length = 100)

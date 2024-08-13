@@ -88,6 +88,7 @@ public class OdemeServiceImpl implements OdemeService {
             logger.info("Processing OdemeServisRequest data: {}", result.getData());
             logger.info("FposResponse data: {}", fposResponse);
             odemeDetay.setOdemeDetayDurum(Util.getDurum(fposResponse.getDurum()).getOdemeDetayDurumKodu());
+            odemeDetayRepository.save(odemeDetay);
             return result;
         }
 
