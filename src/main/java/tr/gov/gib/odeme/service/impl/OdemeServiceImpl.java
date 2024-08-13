@@ -57,10 +57,10 @@ public class OdemeServiceImpl implements OdemeService {
         odemeDetay.setVergiId(borc.getVergiId());
         //OID üretme işlemi.
         if (borc.getOdemeTur().compareTo('S') == 0) {
-            odemeDetay.setOid(OIDGenerator.getInstance().getSposOid());
+            odemeDetay.setOid(OIDGenerator.getSposOID());
         } else if (borc.getOdemeTur().compareTo('F') == 0) {
             //OID generator çalışırken hata fırlatıyor.
-            odemeDetay.setOid("12345");
+            odemeDetay.setOid(OIDGenerator.getFposOID());
         }
         odemeRepository.save(odeme);
         OdemeResponse odemeResponse = new OdemeResponse();
