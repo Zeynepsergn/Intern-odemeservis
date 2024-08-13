@@ -3,6 +3,7 @@ package tr.gov.gib.odeme.controller;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ import tr.gov.gib.odeme.service.OdemeService;
 public class Odeme extends GibExceptionHandler {
     private final OdemeService odemeService;
 
-    public Odeme(OdemeService odemeService) {
+    public Odeme(@Qualifier("OdemeService") OdemeService odemeService) {
         this.odemeService = odemeService;
     }
 
