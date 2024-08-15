@@ -25,11 +25,11 @@ public class OdemeResponse {
         this.odemeOid = id;
         this.tckn = borc.getTckn();
         setOdenecekMiktar(borc.getBorc());
-        setKartNo("5110530090500");
-        setCcv(681);
-        setSonKullanimTarihiAy(4);
-        setSonKullanimTarihiYil(2029);
-        setKartSahibi("Yargı Kısakürek");
+        setKartNo("9999992661008912");
+        setCcv(237);
+        setSonKullanimTarihiAy(5);
+        setSonKullanimTarihiYil(2025);
+        setKartSahibi("Şehamet Çamurcuoğlu");
     }
 }
 
