@@ -19,6 +19,10 @@ public enum OdemeDetayDurum {
         return odemeDetayDurumKodu;
     }
 
+    public String getOdemeDetayDurum() {
+        return odemeDetayDurumu;
+    }
+
     OdemeDetayDurum(String odemeDetayDurumu, Short odemeDetayDurumKodu) {
         this.odemeDetayDurumu = odemeDetayDurumu;
         this.odemeDetayDurumKodu = odemeDetayDurumKodu;

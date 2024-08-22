@@ -38,7 +38,11 @@ public class OdemeServiceImpl implements OdemeService {
     @Override
     public GibResponse odemeYap(GibRequest<BorcSorguReponse> request) {
         BorcSorguReponse borc = request.getData();
+
+        // 0. Aşama : Odeme geldi.
         Odeme odeme = new Odeme(borc);
+
+        // Odeme detay tablosuna ilk kayıt atma
         OdemeDetay odemeDetay = new OdemeDetay(borc);
         odemeDetay.setOdeme(odeme);
 

@@ -4,7 +4,8 @@ public enum OdemeDurum {
     ODEME_GELDI("Ödeme Geldi", (short) 0),
     ODEME_GERCEKLESTI("Ödeme Gerçekleşti", (short) 1),
     ODEME_DETAY_YAZILDI("Detay Yazildi", (short) 2),
-    ODEME_TAHSIL_EDILDI("Tahsil Edildi", (short) 3);
+    ODEME_TAHSIL_EDILDI("Tahsil Edildi", (short) 3),
+    ODEME_YAPILAMADI("Ödeme Yapılamadı", (short) 4);
 
     private String odemeDurumu;
     private Short odemeDurumKodu;

@@ -1,13 +1,6 @@
 package tr.gov.gib.odeme.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +12,10 @@ import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "odeme", schema = "gsths")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Odeme {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odeme_id_gen")
@@ -39,12 +32,16 @@ public class Odeme {
     @Column(name = "odeme_durum")
     private Short odemeDurum;
 
-    @OneToOne(mappedBy = "odeme")
-    private OdemeDetay odemeDetays;
+    @Column(name = "vergi_tur_id")
+    private Integer vergiTur;
+
+    @Column(name = "mukellef_kullanici_id")
+    private Long mukellefKullaniciId;
 
     public Odeme(BorcSorguReponse borc) {
         this.mukellefBorcId = borc.getMukellefBorcId();
         this.odemeDurum = OdemeDurum.ODEME_GELDI.getOdemeDurumKodu();
         this.optime = new Date();
     }
+
 }

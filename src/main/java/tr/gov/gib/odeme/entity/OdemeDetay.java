@@ -1,6 +1,7 @@
 package tr.gov.gib.odeme.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,10 @@ import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "odeme_detay", schema = "gsths")
-@AllArgsConstructor
-@NoArgsConstructor
 public class OdemeDetay {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odeme_detay_id_gen")
@@ -33,9 +34,11 @@ public class OdemeDetay {
     @Column(name = "vergi_id")
     private Integer vergiId;
 
+    @Size(max = 20)
     @Column(name = "oid", length = 20)
     private String oid;
 
+    @Size(max = 100)
     @Column(name = "aciklama", length = 100)
     private String aciklama;
 
@@ -57,4 +60,5 @@ public class OdemeDetay {
         this.odenenBorcMiktari = borc.getBorc();
         this.vergiId = borc.getVergiId();
     }
+
 }
