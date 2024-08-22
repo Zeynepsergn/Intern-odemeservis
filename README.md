@@ -1,7 +1,7 @@
 # Environment Variables
 ---------------------------
 <pre>
-PORT=7070;
+PORT=7010;
 DB_URL=jdbc:postgresql://localhost:5432/PROJE;
 DB_USER=postgres;
 DB_PASS=123;
@@ -22,6 +22,6 @@ RABBITMQ_EXCHANGE=tahsilat.exchange;
 RABBITMQ_ROUTING=odemerk.*;
 
 FPOS_URL=http://localhost:7030/fpos-server/odeme_servis;
-SPOS_URL=http://10.251.34.57:7060/spos-server/;
-NAKIT_URL=http://10.251.34.57:9090/nakit-server/;
+SPOS_URL=http://localhost:7060/spos-server/;
+NAKIT_URL=http://localhost:9090/nakit-server/;
 </pre>
