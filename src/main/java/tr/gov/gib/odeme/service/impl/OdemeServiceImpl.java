@@ -14,6 +14,7 @@ import tr.gov.gib.odeme.entity.OdemeDetay;
 import tr.gov.gib.odeme.object.BorcSorguReponse;
 import tr.gov.gib.odeme.object.OdemeKanaliDTO;
 import tr.gov.gib.odeme.service.FposOdemeKanaliService;
+import tr.gov.gib.odeme.service.NakitOdemeKanaliService;
 import tr.gov.gib.odeme.service.OdemeService;
 import tr.gov.gib.odeme.service.SposOdemeKanaliService;
 import tr.gov.gib.odeme.util.enums.OdemeKanallari;
@@ -26,8 +27,13 @@ public class OdemeServiceImpl implements OdemeService {
 
     @Value("${fpos.servis.url}")
     private String fposUrl;
+
+    @Value("${nakit.servis.url}")
+    private String nakitUrl;
+
     private final FposOdemeKanaliService fposOdemeKanaliService;
     private final SposOdemeKanaliService sposOdemeKanaliService;
+    private final NakitOdemeKanaliService nakitOdemeKanaliService;
 
     @Override
     public GibResponse odemeYap(GibRequest<BorcSorguReponse> request) {
@@ -64,6 +70,13 @@ public class OdemeServiceImpl implements OdemeService {
     }
 
     @Override
+    public GibResponse nakitOdemeYap(GibRequest request) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<GibRequest> requestEntity = new HttpEntity<>(request);
+        return restTemplate.exchange(fposUrl, HttpMethod.POST, requestEntity, GibResponse.class).getBody();
+    }
+
+    @Override
     public GibResponse sposOdemeYap(OdemeKanaliDTO odemeKanaliDTO) {
         return sposOdemeKanaliService.sposOdemeYap(odemeKanaliDTO);
     }
@@ -71,5 +84,10 @@ public class OdemeServiceImpl implements OdemeService {
     @Override
     public GibResponse fposOdemeYap(OdemeKanaliDTO odemeKanaliDTO) {
         return fposOdemeKanaliService.fposOdemeYap(odemeKanaliDTO);
+    }
+
+    @Override
+    public GibResponse nakitOdemeYap(OdemeKanaliDTO odemeKanaliDTO) {
+        return nakitOdemeKanaliService.nakitOdemeYap(odemeKanaliDTO);
     }
 }

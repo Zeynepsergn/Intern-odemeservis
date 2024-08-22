@@ -12,7 +12,13 @@ public interface OdemeService {
 
     GibResponse fposOdemeYap(GibRequest request);
 
+    GibResponse nakitOdemeYap(GibRequest request);
+
     GibResponse sposOdemeYap(OdemeKanaliDTO odemeKanaliDTO);
 
     GibResponse fposOdemeYap(OdemeKanaliDTO odemeKanaliDTO);
+
+    GibResponse nakitOdemeYap(OdemeKanaliDTO odemeKanaliDTO);
+
+
 }

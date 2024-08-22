@@ -35,4 +35,9 @@ public class OdemeController extends GibExceptionHandler {
         return odemeService.fposOdemeYap(request);
     }
 
+    @RequestMapping(path = "/nakitOdemeYap", method = RequestMethod.POST)
+    public GibResponse nakitOdemeYap(@RequestBody GibRequest request) {
+        return odemeService.nakitOdemeYap(request);
+    }
+
 }

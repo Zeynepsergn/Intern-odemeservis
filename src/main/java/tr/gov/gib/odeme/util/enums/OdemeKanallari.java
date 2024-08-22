@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 
 public enum OdemeKanallari {
     SPOS("S", OdemeService::sposOdemeYap),
+    NAKIT("N", OdemeService::nakitOdemeYap),
     FPOS("F", OdemeService::fposOdemeYap);
 
     private String odemeKanaliAciklama;
