@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import tr.gov.gib.gibcore.exception.GibException;
 import tr.gov.gib.gibcore.object.response.GibResponse;
-import tr.gov.gib.gibcore.object.reuest.GibRequest;
+import tr.gov.gib.gibcore.object.request.GibRequest;
 import tr.gov.gib.gibcore.util.OIDGenerator;
 import tr.gov.gib.odeme.entity.Odeme;
 import tr.gov.gib.odeme.entity.OdemeDetay;

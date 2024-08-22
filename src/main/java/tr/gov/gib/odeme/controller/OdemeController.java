@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import tr.gov.gib.gibcore.exception.GibExceptionHandler;
 import tr.gov.gib.gibcore.object.response.GibResponse;
-import tr.gov.gib.gibcore.object.reuest.GibRequest;
+import tr.gov.gib.gibcore.object.request.GibRequest;
 import tr.gov.gib.odeme.object.BorcSorguReponse;
 import tr.gov.gib.odeme.service.OdemeService;
 

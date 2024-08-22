@@ -8,8 +8,6 @@ public class FposResponse {
     private Integer odemeOid;
     private Short durum;
     private String aciklama;
-
-    //FPostan Gelmeli
     private String posId;
     private String bankaAdi;
 }

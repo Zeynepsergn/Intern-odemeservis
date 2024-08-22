@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-//Bu aslında diğer servislere yapılacak olan request değil mi?
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
