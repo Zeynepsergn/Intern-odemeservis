@@ -20,7 +20,7 @@ import java.util.Date;
 public class OdemeDetay {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odeme_detay_id_gen")
-    @SequenceGenerator(name = "odeme_detay_id_gen", sequenceName = "odeme_detay_odeme_detay_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "odeme_detay_id_gen", sequenceName = "odeme_detay_odeme_detay_id_seq", schema = "gsths",allocationSize = 1)
     @Column(name = "odeme_detay_id", nullable = false)
     private Integer id;
 

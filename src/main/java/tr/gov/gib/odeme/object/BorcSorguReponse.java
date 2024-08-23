@@ -20,6 +20,5 @@ public class BorcSorguReponse {
     private BigDecimal borc;
     private Character odemeTur;
     private String odemeTurDsc;
-    private Integer mukellefBorcId;
     private Integer mukellefKullaniciId;
 }

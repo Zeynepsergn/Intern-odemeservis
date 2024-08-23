@@ -39,7 +39,7 @@ public class Odeme {
     private Long mukellefKullaniciId;
 
     public Odeme(BorcSorguReponse borc) {
-        this.mukellefBorcId = borc.getMukellefBorcId();
+        this.mukellefBorcId = borc.getBorcId();
         this.odemeDurum = OdemeDurum.ODEME_GELDI.getOdemeDurumKodu();
         this.optime = new Date();
     }
