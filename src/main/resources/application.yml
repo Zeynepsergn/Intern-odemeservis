@@ -29,7 +29,7 @@ spring:
     open-in-view: false
     properties:
       hibarnate:
-        default_schema: gsths
+        default_schema: ${DB_SCHEMA}
 
 swagger:
   info:

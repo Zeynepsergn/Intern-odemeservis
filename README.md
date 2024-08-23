@@ -2,10 +2,11 @@
 ---------------------------
 <pre>
 PORT=7010;
-DB_URL=jdbc:postgresql://localhost:5432/PROJE;
+DB_URL=jdbc:postgresql://localhost:5432/gib_staj;
 DB_USER=postgres;
 DB_PASS=123;
 CONTEXT_PATH=/odeme-server;
+DB_SCHEMA=gsths;
 
 SWAGGER_TITLE=Ödeme Servisi;
 SWAGGER_VERSION=1.0;
