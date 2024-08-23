@@ -32,7 +32,7 @@ public class Odeme {
     @Column(name = "odeme_durum")
     private Short odemeDurum;
 
-    @Column(name = "vergi_tur_id")
+    @Column(name = "vergi_id")
     private Integer vergiTur;
 
     @Column(name = "mukellef_kullanici_id")
