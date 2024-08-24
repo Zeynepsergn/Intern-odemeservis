@@ -24,5 +24,5 @@ RABBITMQ_ROUTING=odemerk.*;
 
 FPOS_URL=http://localhost:7030/fpos-server/odeme_servis;
 SPOS_URL=http://localhost:7060/spos-server/;
-NAKIT_URL=http://localhost:9090/nakit-server/;
+NAKIT_URL=http://localhost:9090/api/nakit-odeme/odeme-al;
 </pre>
