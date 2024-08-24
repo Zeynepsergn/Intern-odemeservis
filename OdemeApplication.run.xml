@@ -1,27 +1,27 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="OdemeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <envs>
-      <env name="PORT" value="7010" />
+      <env name="CONTEXT_PATH" value="/odeme-server" />
+      <env name="DB_PASS" value="123" />
+      <env name="DB_SCHEMA" value="gsths" />
       <env name="DB_URL" value="jdbc:postgresql://localhost:5432/gib_staj" />
       <env name="DB_USER" value="postgres" />
-      <env name="DB_PASS" value="123" />
-      <env name="CONTEXT_PATH" value="/odeme-server" />
-      <env name="DB_SCHEMA" value="gsths" />
-      <env name="SWAGGER_TITLE" value="Ödeme Servisi" />
-      <env name="SWAGGER_VERSION" value="1.0" />
-      <env name="SWAGGER_DSC" value="Ödeme service ile ilgili islemleri yapan servistir" />
-      <env name="SWAGGER_TOS" value="https://gib.gov.tr" />
-      <env name="SWAGGER_NAME" value="Hüseyin Enes Gökçe" />
-      <env name="SWAGGER_EMAIL" value="hüseyin.enes.gokce@gelirler.gov.tr" />
-      <env name="RABBITMQ_HOST" value="localhost" />
-      <env name="RABBITMQ_PORT" value="5672" />
-      <env name="RABBITMQ_USER" value="guest" />
-      <env name="RABBITMQ_PASS" value="guest" />
-      <env name="RABBITMQ_EXCHANGE" value="tahsilat.exchange" />
-      <env name="RABBITMQ_ROUTING" value="odemerk.*" />
       <env name="FPOS_URL" value="http://localhost:7030/fpos-server/odeme_servis" />
-      <env name="SPOS_URL" value="http://localhost:7060/spos-server/" />
       <env name="NAKIT_URL" value="http://localhost:9090/api/nakit-odeme/odeme-al" />
+      <env name="PORT" value="7010" />
+      <env name="RABBITMQ_EXCHANGE" value="tahsilat.exchange" />
+      <env name="RABBITMQ_HOST" value="localhost" />
+      <env name="RABBITMQ_PASS" value="guest" />
+      <env name="RABBITMQ_PORT" value="5672" />
+      <env name="RABBITMQ_ROUTING" value="odemerk.*" />
+      <env name="RABBITMQ_USER" value="guest" />
+      <env name="SPOS_URL" value="http://localhost:7060/spos-server/sposOdemeYap" />
+      <env name="SWAGGER_DSC" value="Ödeme service ile ilgili islemleri yapan servistir" />
+      <env name="SWAGGER_EMAIL" value="hüseyin.enes.gokce@gelirler.gov.tr" />
+      <env name="SWAGGER_NAME" value="Hüseyin Enes Gökçe" />
+      <env name="SWAGGER_TITLE" value="Ödeme Servisi" />
+      <env name="SWAGGER_TOS" value="https://gib.gov.tr" />
+      <env name="SWAGGER_VERSION" value="1.0" />
     </envs>
     <module name="odeme.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="tr.gov.gib.odeme.OdemeApplication" />
