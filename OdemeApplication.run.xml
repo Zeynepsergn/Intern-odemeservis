@@ -3,10 +3,11 @@
     <envs>
       <env name="CONTEXT_PATH" value="/odeme-server" />
       <env name="DB_PASS" value="123456" />
+      <env name="DB_SCHEMA" value="gsths" />
       <env name="DB_URL" value="jdbc:postgresql://localhost:5432/gib_staj" />
       <env name="DB_USER" value="postgres" />
-      <env name="FPOS_URL" value="http://localhost:7030/fpos-server/odeme_servis" />
-      <env name="NAKIT_URL" value="http://localhost:9090/nakit-server/" />
+      <env name="FPOS_URL" value="http://localhost:7030/fpos-server/fposOdemeYap" />
+      <env name="NAKIT_URL" value="http://localhost:9090/nakit-service/nakitOdemeYap" />
       <env name="PORT" value="7010" />
       <env name="RABBITMQ_EXCHANGE" value="tahsilat.exchange" />
       <env name="RABBITMQ_HOST" value="localhost" />
@@ -21,7 +22,6 @@
       <env name="SWAGGER_TITLE" value="Ödeme Servisi" />
       <env name="SWAGGER_TOS" value="https://gib.gov.tr" />
       <env name="SWAGGER_VERSION" value="1.0" />
-      <env name="DB_SCHEMA" value="gsths" />
     </envs>
     <module name="odeme-service.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="tr.gov.gib.odeme.OdemeApplication" />

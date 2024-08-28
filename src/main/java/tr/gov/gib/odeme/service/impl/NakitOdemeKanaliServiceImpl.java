@@ -15,6 +15,8 @@ import tr.gov.gib.gibcore.object.request.GibRequest;
 import tr.gov.gib.gibcore.object.response.GibResponse;
 import tr.gov.gib.gibcore.util.OIDGenerator;
 import tr.gov.gib.gibcore.util.ServiceMessage;
+import tr.gov.gib.odeme.client.NakitFeignClient;
+import tr.gov.gib.odeme.client.SposFeignClient;
 import tr.gov.gib.odeme.component.OdemePublisher;
 import tr.gov.gib.odeme.entity.Odeme;
 import tr.gov.gib.odeme.entity.OdemeDetay;
@@ -36,6 +38,7 @@ public class NakitOdemeKanaliServiceImpl implements NakitOdemeKanaliService {
     private final OdemeRepository odemeRepository;
     private final OdemeDetayRepository odemeDetayRepository;
     private final OdemePublisher rabbitPublisher;
+    private final NakitFeignClient nakitFeignClient;
 
     private static final Logger logger = LoggerFactory.getLogger(OdemeServiceImpl.class);
 
@@ -56,10 +59,10 @@ public class NakitOdemeKanaliServiceImpl implements NakitOdemeKanaliService {
             GibRequest<OdemeResponse> gibRequest = new GibRequest<>();
             gibRequest.setData(odemeResponse);
 
-            HttpEntity<GibRequest> requestEntity = new HttpEntity<>(gibRequest);
-            GibResponse response = restTemplate.exchange(nakitUrl, HttpMethod.POST, requestEntity, GibResponse.class).getBody();
+            GibResponse response = nakitFeignClient.nakitOdemeYap(gibRequest);
 
             ObjectMapper objectMapper = new ObjectMapper();
+
             NakitOdemeResponse nakitOdemeResponse = objectMapper.convertValue(response.getData(), NakitOdemeResponse.class);
             logger.info("Processing OdemeServisRequest data: {}", response.getData());
             logger.info("NakitResponse data: {}", nakitOdemeResponse);
