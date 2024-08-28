@@ -23,7 +23,7 @@
       <env name="SWAGGER_VERSION" value="1.0" />
       <env name="DB_SCHEMA" value="gsths" />
     </envs>
-    <module name="odeme.main" />
+    <module name="odeme-service.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="tr.gov.gib.odeme.OdemeApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
