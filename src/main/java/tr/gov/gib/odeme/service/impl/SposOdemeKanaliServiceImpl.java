@@ -12,6 +12,7 @@ import tr.gov.gib.gibcore.object.response.GibResponse;
 import tr.gov.gib.gibcore.object.request.GibRequest;
 import tr.gov.gib.gibcore.util.OIDGenerator;
 import tr.gov.gib.gibcore.util.ServiceMessage;
+import tr.gov.gib.odeme.client.SposFeignClient;
 import tr.gov.gib.odeme.component.OdemePublisher;
 import tr.gov.gib.odeme.entity.Odeme;
 import tr.gov.gib.odeme.entity.OdemeDetay;
@@ -33,6 +34,7 @@ public class SposOdemeKanaliServiceImpl implements SposOdemeKanaliService {
     private final OdemeRepository odemeRepository;
     private final OdemeDetayRepository odemeDetayRepository;
     private final OdemePublisher rabbitPublisher;
+    private final SposFeignClient sposFeignClient;
 
     @Override
     public GibResponse sposOdemeYap(OdemeKanaliDTO odemeKanaliDTO) {
@@ -51,8 +53,7 @@ public class SposOdemeKanaliServiceImpl implements SposOdemeKanaliService {
             GibRequest<OdemeResponse> gibRequest = new GibRequest<>();
             gibRequest.setData(odemeResponse);
 
-            HttpEntity<GibRequest> requestEntity = new HttpEntity<>(gibRequest);
-            GibResponse response = restTemplate.exchange(sposUrl, HttpMethod.POST, requestEntity, GibResponse.class).getBody();
+            GibResponse response = sposFeignClient.sposOdemeYap(gibRequest);
 
             ObjectMapper mapper = new ObjectMapper();
             SposResponse sposResponse = mapper.convertValue(response.getData(), SposResponse.class);
